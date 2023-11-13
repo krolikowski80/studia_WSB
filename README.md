@@ -1,4 +1,4 @@
-## Zadania
+## Semestr 1
 
-* [Poddstawy Programowania - Python - Zajęcia](./zajęcia)
-* [Poddstawy Programowania - Python - Zadania](./zadania)
+* [Poddstawy Programowania - Python](./Python)
+* [Algorytmy i Struktury Danych](./Algorytmy i Struktury Danych)
