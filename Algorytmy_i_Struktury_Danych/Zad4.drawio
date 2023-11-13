@@ -1,0 +1,34 @@
+<mxfile host="app.diagrams.net" modified="2023-11-04T13:27:49.408Z" agent="Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="TeXcsd6Yw0u3WvnEwYgW" version="22.0.8" type="google">
+  <diagram name="Strona-1" id="fYk1f6DH9MsTXwYHCI5c">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="-RxCLzDIo186x_1Me0vs-1" value="Narysuj schemat blokowy algorytmu który znajdzie największą oraz najmniejszą liczbę w podanym&lt;br&gt;przez użytkownika ciągu (listy). Dla uproszczenia ”wczytujemy” wartości za pomocą jednego&lt;br&gt;bloczka wprowadzenia danych wejściowych." style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="560" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="-RxCLzDIo186x_1Me0vs-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-RxCLzDIo186x_1Me0vs-2" target="-RxCLzDIo186x_1Me0vs-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-RxCLzDIo186x_1Me0vs-2" value="START" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="240" y="120" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="-RxCLzDIo186x_1Me0vs-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-RxCLzDIo186x_1Me0vs-3" target="-RxCLzDIo186x_1Me0vs-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-RxCLzDIo186x_1Me0vs-3" value="Wprowadź &lt;br&gt;listę" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="250" y="240" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-RxCLzDIo186x_1Me0vs-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-RxCLzDIo186x_1Me0vs-7" target="-RxCLzDIo186x_1Me0vs-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-RxCLzDIo186x_1Me0vs-7" value="min = 0&lt;br&gt;max = 0&lt;br&gt;iter = 0&lt;br&gt;list_len = len(list)" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="250" y="340" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="-RxCLzDIo186x_1Me0vs-9" value="min &amp;gt; list[iter]" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="250" y="485" width="100" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

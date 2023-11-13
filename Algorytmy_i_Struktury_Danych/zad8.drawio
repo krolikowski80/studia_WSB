@@ -1,0 +1,37 @@
+<mxfile host="app.diagrams.net" modified="2023-11-05T14:10:17.163Z" agent="Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="yguqF6-qyFdLIv6Nwfi6" version="22.0.8" type="google">
+  <diagram name="Strona-1" id="-uxcUJg5nI26aVC2P7B_">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2nf3JfO8T1qG2nzRD_50-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2nf3JfO8T1qG2nzRD_50-1" target="2nf3JfO8T1qG2nzRD_50-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2nf3JfO8T1qG2nzRD_50-1" value="START" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="40" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2nf3JfO8T1qG2nzRD_50-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2nf3JfO8T1qG2nzRD_50-2" target="2nf3JfO8T1qG2nzRD_50-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2nf3JfO8T1qG2nzRD_50-2" value="Pobierz listę &quot;L&quot;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2nf3JfO8T1qG2nzRD_50-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2nf3JfO8T1qG2nzRD_50-4" target="2nf3JfO8T1qG2nzRD_50-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2nf3JfO8T1qG2nzRD_50-4" value="Indeks = 0&lt;br&gt;Suma = 0&lt;br&gt;Iloczyn = 0" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="320" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2nf3JfO8T1qG2nzRD_50-10" value="PRAWDA" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2nf3JfO8T1qG2nzRD_50-6" target="2nf3JfO8T1qG2nzRD_50-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2nf3JfO8T1qG2nzRD_50-6" value="index &amp;lt; len(L)" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="302.5" y="340" width="155" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2nf3JfO8T1qG2nzRD_50-9" value="suma = suma + L[index]&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="295" y="480" width="170" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

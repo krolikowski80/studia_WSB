@@ -1,0 +1,16 @@
+<mxfile host="app.diagrams.net" modified="2023-11-04T13:40:16.880Z" agent="Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="kSJFUR09Sljtxlf_Cseu" version="22.0.8" type="google">
+  <diagram name="Strona-1" id="jzo7DL0FTQ_X9C7FFDN-">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ZmkgnKwZEdvQ4ZaW9zn2-2" value="Napisz pseudokod który zliczy ile liczb naturalnych jest podzielne przez 3 w przedziale od 4 do 29 włącznie." style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="41" y="38" width="640" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="ZmkgnKwZEdvQ4ZaW9zn2-3" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="70" y="108" width="20" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
