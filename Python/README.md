@@ -2,3 +2,4 @@
 
 * [Zadania](./zadania)
 * [Zajęcia](./zajęcia/)
+* [Pomoc](./pomoce/)
