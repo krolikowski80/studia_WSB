@@ -1,5 +1,5 @@
 ## Algorytmy i Struktury Danych
 
 * [Zadania](./zadania)
-* [Zajęcia](./zajęcia/)
+* [Zajęcia](./zajecia/)
 * [Pomoc](./pomoce/)
