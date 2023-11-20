@@ -4,6 +4,7 @@
 # an−2 + an−1, n > 1
 
 def fibonacci(n):
+    """Obliczanie Fibonacciego w sposób iteracyjny"""
     if n == 0:
         return 0
     elif n == 1:
@@ -17,5 +18,4 @@ def fibonacci(n):
 
 
 n = int(input("Podaj liczbę n: "))
-result = fibonacci(n)
-print(f"Wartość {n}-tego wyrazu ciągu Fibonacciego: {result}")
+print(f"Wartość {n}-tego wyrazu ciągu Fibonacciego: {fibonacci(n)}")
