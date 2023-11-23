@@ -253,26 +253,134 @@
 # count()
 
 # # ----------------------------------------------------------------
-# Zad 10.
-# Zaimplementuj funkcję, która utworzy listę liczb pierwszych do n (n jest argumentem funkcji)
-# korzystając z algorytmu sita Eratostenesa. Następnie, napisz program, który wygeneruje za pomocą
-# tej funkcji listę liczb pierwszych do 100 i zapisze ją do pliku prime_numbers.txt, zapisując
-# po 5 kolejnych liczb pierwszych w każdym wierszu pliku wynikowego/
-# Przydatne: with, open(), write()
+# # Zad 10.
+# # Zaimplementuj funkcję, która utworzy listę liczb pierwszych do n (n jest argumentem funkcji)
+# # korzystając z algorytmu sita Eratostenesa. Następnie, napisz program, który wygeneruje za pomocą
+# # tej funkcji listę liczb pierwszych do 100 i zapisze ją do pliku prime_numbers.txt, zapisując
+# # po 5 kolejnych liczb pierwszych w każdym wierszu pliku wynikowego/
+# # Przydatne: with, open(), write()
 
-########################################################################
-# Oto kroki algorytmu sito Eratostenesa:
-# 1. Tworzenie listy wszystkich liczb naturalnych od 2 do ustalonego limitu.
-# 2. Rozpoczęcie od pierwszej liczby z listy (2) i zaznaczenie wszystkich jej wielokrotności
-#     (4, 6, 8, ...) jako skreślonych (nie będących liczbami pierwszymi).
-# 3. Przejście do kolejnej nieoznaczonej liczby na liście (następnego nie skreślonego),
-#     a następnie zaznaczenie wszystkich jej wielokrotności jako skreślonych.
-# 4. Powtarzanie kroku 3, aż do momentu osiągnięcia końca listy.
-# 5. Pozostawienie na liście jedynie nieoznaczonych liczb, które są liczbami pierwszymi.
-#
-# Na końcu algorytmu pozostają tylko liczby pierwsze mniejsze od ustalonego limitu.
-# Jest to prosty i efektywny sposób znajdowania liczb pierwszych.
-# Jego złożoność obliczeniowa zależy od wielkości badanego zakresu, ale w praktyce jest to
-# jedna z najszybszych metod znajdowania liczb pierwszych dla niewielkich liczb.
-#
-########################################################################
+# ########################################################################
+# # Oto kroki algorytmu sito Eratostenesa:
+# # 1. Tworzenie listy wszystkich liczb naturalnych od 2 do ustalonego limitu.
+# # 2. Rozpoczęcie od pierwszej liczby z listy (2) i zaznaczenie wszystkich jej wielokrotności
+# #     (4, 6, 8, ...) jako skreślonych (nie będących liczbami pierwszymi).
+# # 3. Przejście do kolejnej nieoznaczonej liczby na liście (następnego nie skreślonego),
+# #     a następnie zaznaczenie wszystkich jej wielokrotności jako skreślonych.
+# # 4. Powtarzanie kroku 3, aż do momentu osiągnięcia końca listy.
+# # 5. Pozostawienie na liście jedynie nieoznaczonych liczb, które są liczbami pierwszymi.
+# #
+# # Na końcu algorytmu pozostają tylko liczby pierwsze mniejsze od ustalonego limitu.
+# # Jest to prosty i efektywny sposób znajdowania liczb pierwszych.
+# # Jego złożoność obliczeniowa zależy od wielkości badanego zakresu, ale w praktyce jest to
+# # jedna z najszybszych metod znajdowania liczb pierwszych dla niewielkich liczb.
+# #
+# ########################################################################
+
+# def sito_eratostenesa(n):
+#     """Funkcja obliczająca liczby pierwsze"""
+#     prime = [True for _ in range(n + 1)]
+#     p = 2
+
+#     while p * p <= n:
+#         if prime[p] == True:
+#             for i in range(p * p, n + 1, p):
+#                 prime[i] = False
+#         p += 1
+
+#     primes = []
+#     for p in range(2, n + 1):
+#         if prime[p] == True:
+#             primes.append(p)
+
+#     return primes
+
+
+# n = int(input("Podaj zakres wyszukiwania: "))
+
+# prime_numbers = sito_eratostenesa(n)
+
+# # Zapisujemy wynik do pliku
+# with open('Python\zajecia\lab3_pliki\prime_numbers.txt', 'w') as file:
+#     for i, num in enumerate(prime_numbers, start=1):
+#         file.write(str(num) + ' ')
+#         # Zapisujemy co 5 liczb w nowym wierszu
+#         if i % 5 == 0:
+#             file.write('\n')
+
+
+# # ----------------------------------------------------------------
+# # Zad 11.
+# # Zaimplementuj funkcje-generator, której zadaniem będzie generowanie kolejnych n liczb ciągu
+# # Fibonacciego (wzór jest podany niżej). Liczba n jest podawana jako argument funkcji. Funkcja
+# # ma używać słowa kluczowego yield. Przy implementacji nie używamy rekurencji!
+# # a_0 = 0
+# # a_1 = 1
+# # a_n = a_n-2 + a_n-1 n>1
+
+
+# def ciag_fibo(n):
+#     """Oblicza kolejne wyrazy ciągu fibo przy pomocy generatora"""
+#     a, b = 0, 1
+#     licznik = 0
+
+#     while licznik < n:
+#         yield a
+#         a, b = b, a + b
+#         licznik += 1
+
+
+# # Jakby komuś zachciało się pisać litery albo liczby ujemne alb nierzeczywiste
+# try:
+#     ile = int(input("Ile kolejnych wyrazów ciągu chcesz zobaczyć?: "))
+#     if ile <= 0:
+#         print("Ej, no nie żartuj ;)")
+#     else:
+#         for ciag in ciag_fibo(ile):
+#             print(ciag)
+
+# except ValueError:
+#     print("Nie wpisałeś dodatniej liczby całkowitej.")
+
+# # ----------------------------------------------------------------
+
+# # Zad 12.
+# # Wczytaj plik students.csv, który zawiera w kolejnych wierszach dane o studentach w postaci
+# # imię, nazwisko, numer albumu, ocena, oddzielone przycinkami. Należy wczytać te dane do struktury
+# # listy krotek (list of tuples). Następnie, należy użyć funkcji wbudowanych sorted(), max()
+# # z argumentem key i wyświetlić:
+# # • Dane o studentach posortowane po numerach albumów rosnąco,
+# # • Dane o studentach posortowane po ocenach malejąco,
+# # • Dane studenta z najwyższą oceną.
+# # Przydatne: sorted(), max(), lambda, with, open(), read(), splitlines(), split()
+# # "Python\zajecia\lab3_pliki\students.csv"
+
+
+# def file_reader():
+#     """Czyanie z pliku i sortowanie danych"""
+#     student_data = []
+#     with open("Python\zajecia\lab3_pliki\students.csv", "r") as f:
+#         for line in f.read().splitlines():
+#             data = line.split(',')
+#             student_data.append(data)
+#         return student_data
+
+
+# students = file_reader()
+
+# by_album = sorted(students, key=lambda x: x[-2])
+# print("\nDane studentów posortowane po numerach albumów rosnąco:")
+# for student in by_album:
+#     print(f"Imię: {student[0]}, Nazwisko: {student[1]}, Numer albumu: {
+#           student[2]}, Ocena: {student[3]}")
+
+# by_score = sorted(students, key=lambda x: x[-1])
+# print("\nDane o studentach posortowane po ocenach malejąco:")
+# for student in by_score:
+#     print(f"Imię: {student[0]}, Nazwisko: {student[1]}, Numer albumu: {
+#           student[2]}, Ocena: {student[3]}")
+
+# max_score = max(students, key=lambda x: x[-1])
+# print("\nDane studenta z najwyższą oceną:")
+# print(f"Imię: {max_score[0]}, Nazwisko: {max_score[1]}, Numer albumu: {
+#     max_score[2]}, Ocena: {max_score[3]}")
