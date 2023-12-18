@@ -1,5 +1,13 @@
 # Tomasz Królikowski
 # Numer albumu: 153790
+
+import random
+import math
+from operator import index
+from collections import Counter
+from itertools import permutations, combinations
+
+
 # -------------------------------------------------------------------------------
 
 # Zad 1.
@@ -7,9 +15,6 @@
 # losowymi liczbami całkowitymi z zakresu od a do b. Argument n ma mieć wartość domyślną 10,
 # argument a wartość domyślną 0 i argument b wartość domyślną 10.
 # Przydatne: def, return, random.randrange()
-
-import random
-
 
 def generate_numbers(n=10, a=0, b=10):
     """generator liczb"""
@@ -32,11 +37,10 @@ print(generate_numbers())
 # •Wypisze zbiór liczb unikalnych występujących w tej liście.
 # Przydatne: print(), max(), min(), index(), sum(), count(), set(), sorted()
 
-from operator import index
-import random
 
 
-def generate_numbers(n, a=0, b=10):
+
+def generator_numbers(n, a=0, b=10):
     """generator liczb"""
     nums = [random.randrange(a, b) for _ in range(n)]
     print(f"Oryginalna lista: {nums}")
@@ -49,7 +53,7 @@ def generate_numbers(n, a=0, b=10):
     print(f"Zbiór liczb unikalnych występujących w tej liście: {set(nums)}")
 
 
-generate_numbers(5)
+generator_numbers(5)
 
 # ----------------------------------------------------------------------------
 # Zad 3.
@@ -57,9 +61,6 @@ generate_numbers(5)
 # 100, a następnie obliczy sumę liczb dodatnich z tej listy,
 # korzystając się ze składni list składanych (list comprehension).
 # Przydatne: List comprehension, random.randrange()
-
-import random
-
 
 def randoml_numbers(n):
     """Program generuje listę składającą się z 20 całkowitych liczb losowych od -100 do 100, a następnie obliczy sumę liczb dodatnich z tej listy"""
@@ -99,10 +100,6 @@ print(mlt_list(54))
 # Do wykonania zadania należy użyć funkcji Counter(), z modułu collections.
 # Przydatne: collections.Counter(), most_common(), random.randrange()
 
-from collections import Counter
-import random
-
-
 def nums_generator(n):
     """5 Najczęściej spotykanych liczb"""
     nums = [random.randint(0, 10) for _ in range(n)]
@@ -120,8 +117,6 @@ nums_generator(50)
 # Zastosuj funkcje z modułu itertools, żeby wypisać na ekran permutacje i kombinacje trzysymbolowe,
 # które można złożyć z liter napisu podanego przez użytkownika.
 # Przydatne: itertools.permutations(), itertools.combinations(), input()
-
-from itertools import permutations, combinations
 
 
 def perm_com(word):
@@ -153,6 +148,7 @@ print(perm_com(word))
 
 
 def det(matrix):
+    """Liczenie wyznacznika macierzy kwadratowej"""
     # Sprawdzenie, czy macierz jest kwadratowa
     rows = len(matrix)
     cols = len(matrix[0])
@@ -204,7 +200,7 @@ print("Wyznacznik:", result_2)
 # nego od użytkownika punktu.
 # Przydatne: with, open(), read(), write(), math.dist()
 
-import math
+
 
 # Wczytanie współrzędnych punktów z pliku points.txt
 with open("Python/zadania/points.txt", "r") as file:
@@ -253,11 +249,10 @@ for distance, point in closest_points:
 # zaimplementowana zgodnie z wymaganiami będzie ona wyrzucać wyjątek, który należy odpo-
 # wiednio obsłużyć.
 # Przydatne: with, open(), read(), splitlines(), write(), math.sqrt(), try, expect
-import math
-
 
 # Funkcja do rozwiązywania równań kwadratowych
 def solve_quadratic_equation(a, b, c):
+    """Obliczanie pierwiastków funkcji kwadratowej """
     delta = b**2 - 4 * a * c  # Obliczenie delty
     if delta < 0:
         raise ValueError(
@@ -309,9 +304,9 @@ with open(
 # liczbami pierwszymi. Liczby z ciągu Fibonacciego mogą być generowane w dowolny sposób.
 # Przydatne: math.sqrt(), range()
 
-import math
 
 def is_prime(n):
+    """sprawdza czy liczba n podana jako argument jest liczbą pierwszą"""
     if n <= 1 or (n % 2 == 0 and n > 2):
         return False  # 1, liczby ujemne oraz parzyste większe od 2 nie są liczbami pierwszymi
 
@@ -324,6 +319,7 @@ def is_prime(n):
 
 # Znalezienie liczb pierwszych w pierwszych 30 liczbach ciągu Fibonacciego
 def generate_fibonacci_primes(limit):
+    """Znalezienie liczb pierwszych w pierwszych 30 liczbach ciągu Fibonacciego"""
     fibonacci = [0, 1]  # Pierwsze dwie liczby ciągu
     primes = []
 
@@ -359,6 +355,7 @@ print("Pierwsze 30 liczb pierwszych z ciągu Fibonacciego:", fibonacci_primes)
 # 4 13 -> 40 -> 20 -> 10 -> 5 -> 16 -> 8 -> 4 -> 2 -> 1
 
 def collatz(n):
+    """generator, który będzie służyć do generowania kolejnych wyrazów ciągu Collatz’"""
     while n != 1:  # Wykonuj, dopóki n nie jest równy 1
         yield n  # Zwróć aktualną wartość n
         if n % 2 == 0:
@@ -371,6 +368,7 @@ def collatz(n):
 # Przykładowe wywołanie funkcji-generatora
 for i in collatz(13):
     print(i, end=" -> " if i != 1 else "\n")
+
 
 # ------------------------------------------------------------
 # Zad 12.
