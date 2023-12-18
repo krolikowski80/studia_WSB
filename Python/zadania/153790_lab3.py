@@ -140,7 +140,7 @@ def perm_com(word):
 word = input("Wpisz jakieś wyraz: ")
 print(perm_com(word))
 
-----------------------------------------------------------------
+# ----------------------------------------------------------------
 
 # zad 7
 #Zaimplementuj funkcję służąca do obliczenia wyznacznika macierzy kwadratowych o rozmiarze
