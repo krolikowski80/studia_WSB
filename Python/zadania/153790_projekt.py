@@ -1,5 +1,3 @@
-# pylint: disable=invalid-name
-
 # 1. Utworzenie struktury danych:
 # Student: Zdefiniuj strukturę danych, która będzie przechowywać
 # imię, nazwisko, numer albumu i ewentualnie oceny z przedmiotów.
@@ -21,14 +19,3 @@
 # 5. Historia operacji:
 # Rejestrowanie operacji: Stwórz mechanizm rejestrowania operacji wykonywanych na bazie danych.
 # Możesz wykorzystać listę lub kolejkę, aby przechowywać historię operacji.
-
-################################
-# WAŻNE:  pip install tabulate #
-################################
-
-def wyswietl_dane_csv(plik_csv):
-
-
-plik = "/Users/tomasz/local_repo/studia_WSB/Python/zadania/studenci.csv"
-
-wyswietl_dane_csv(plik)
