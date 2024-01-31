@@ -1,1 +1,0 @@
-Tomasz vs Anna - Score: {'Player1': 1, 'Player2': 0}
