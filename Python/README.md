@@ -1,5 +1,5 @@
 ## Podstawy programowania Python
 
-* [Zadania](./zadania)
-* [Zajęcia](./zajecia/)
+* [Semestr 1](./Semestr_1/)
+* [Semestr 2](./Semestr_2/)
 * [Pomoc](./pomoce/)
