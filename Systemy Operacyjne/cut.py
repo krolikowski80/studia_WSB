@@ -1,4 +1,7 @@
 #!/Users/tomasz/.pyenv/versions/3.12.0/bin/python
+# Wykonał : Tomasz KRÓLIKOWSKI
+# Numer albumu : 153790
+# W tym opliku wykonano zadania 1 - 3
 # import dla całego laba
 import sys
 import argparse
