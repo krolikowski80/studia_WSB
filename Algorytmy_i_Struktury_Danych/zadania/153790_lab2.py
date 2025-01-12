@@ -10,6 +10,8 @@
 import random
 
 
+
+
 def najwieksza_liczba(lista):
     """
     Wyszukiwanie największej liczby w nieposortowanej liście liczb."""
