@@ -41,8 +41,10 @@ class StudentDatabase:
 
         :param album_number: Numer albumu studenta do usunięcia.
         """
-        self.students = [s for s in self.students if s["Numer albumu"] != album_number]
-        self._log_history(f"Usunięto studenta z numerem albumu: {album_number}")
+        self.students = [
+            s for s in self.students if s["Numer albumu"] != album_number]
+        self._log_history(
+            f"Usunięto studenta z numerem albumu: {album_number}")
 
     def display_students(self):
         """
@@ -52,10 +54,12 @@ class StudentDatabase:
         table.field_names = ["Imię", "Nazwisko", "Numer albumu", "Oceny"]
         for student in self.students:
             grades = (
-                ", ".join([f"{k}: {v}" for k, v in student["Oceny"].items()]) or "X"
+                ", ".join(
+                    [f"{k}: {v}" for k, v in student["Oceny"].items()]) or "X"
             )
             table.add_row(
-                [student["Imię"], student["Nazwisko"], student["Numer albumu"], grades]
+                [student["Imię"], student["Nazwisko"],
+                    student["Numer albumu"], grades]
             )
         print(table)
 
@@ -75,13 +79,29 @@ class StudentDatabase:
                 )
                 break
 
+    # def save_to_file(self, filename):
+    #     """
+    #     Zapisuje bieżący stan bazy danych studentów do pliku CSV.
+
+    #     :param filename: Nazwa pliku, do którego zostaną zapisani studenci.
+    #     """
+    #     with open(filename, "w", newline="") as file:
+    #         writer = csv.DictWriter(
+    #             file, fieldnames=["Imię", "Nazwisko", "Numer albumu", "Oceny"]
+    #         )
+    #         writer.writeheader()
+    #         for student in self.students:
+    #             student_copy = student.copy()
+    #             student_copy["Oceny"] = ", ".join(
+    #                 [f"{k}: {v}" for k, v in student["Oceny"].items()]
+    #             )
+    #             writer.writerow(student_copy)
     def save_to_file(self, filename):
         """
         Zapisuje bieżący stan bazy danych studentów do pliku CSV.
-
         :param filename: Nazwa pliku, do którego zostaną zapisani studenci.
         """
-        with open(filename, "w", newline="") as file:
+        with open(filename, "w", newline="", encoding="utf-8") as file:
             writer = csv.DictWriter(
                 file, fieldnames=["Imię", "Nazwisko", "Numer albumu", "Oceny"]
             )
