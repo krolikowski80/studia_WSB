@@ -1,6 +1,6 @@
 # Zadanie 3.3 - Korzystanie z dokumentacji języka Python
 
-W ramach tego zadania zapoznałem się z dokumentacją Pythona i wyszukałem informacje na temat funkcji wbudowanej, modułu oraz wyjątku. Każdy z tych elementów jest często używany w programowaniu i warto znać ich działanie.
+W ramach tego zadania zapoznałem się z dokumentacją Pythona i wyszukałem informacje na temat funkcji wbudowanej, modułu oraz wyjątku.
 
 ## 1. Funkcja wbudowana: `zip()`
 Funkcja `zip()` jest bardzo przydatna, gdy chcemy połączyć elementy dwóch (lub więcej) iterowalnych obiektów w krotki. Jeśli jedna z list ma więcej elementów niż druga, `zip()` działa do najkrótszej z nich. Dzięki temu można łatwo tworzyć pary danych, które można później wykorzystywać np. w pętlach.
