@@ -63,6 +63,7 @@ Aby sprawdzić, czy pojedyncze cechy wystarczyły do przewidywania cen domów, w
 Dla każdej zmiennej wygenerowałem również wykresy regresji. Aby sprawdzić, czy pojedyncze cechy wystarczyły do przewidywania cen domów, wytrenowałem **8 osobnych modeli regresji** – każdy na jednej cesze.
 
 Dla każdej zmiennej wygenerowałem również wykresy regresji.
+
 <img src="charts_single_feature/MedInc_regression.png" alt="Regresja MedInc" width="300"/>  
 <img src="charts_single_feature/HouseAge_regression.png" alt="Regresja HouseAge" width="300"/>  
 <img src="charts_single_feature/AveRooms_regression.png" alt="Regresja AveRooms" width="300"/>  
