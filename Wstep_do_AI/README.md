@@ -79,7 +79,7 @@ Dla każdej zmiennej wygenerowałem również wykresy regresji.
 ### Pełna tabela wyników dla wszystkich cech:
 
 | Cecha              | MAE (train) | MSE (train) | MAE (test) | MSE (test) |
-
+----------------------------------------------------------------------------
 | **Wielowymiarowy** | 0.5310      | 0.5234      | 0.5272     | 0.5306     |
 | **MedInc**         | 0.6270      | 0.7051      | 0.6232     | 0.6918     |
 | **HouseAge**       | 0.9086      | 1.3245      | 0.9013     | 1.2985     |
