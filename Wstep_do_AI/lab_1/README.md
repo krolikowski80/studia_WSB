@@ -35,7 +35,7 @@ Rozmiary zbiorów:
 - X_test: 6 192 próbek
 ### (d) Nauka modelu regresji liniowej na zbiorze uczącym
 ### (e) Obliczanie błędów MAE i MSE dla zbiorów uczącego i testowego
-Model regresji liniowej został nauczony na zbiorze uczącym. Wyniki błędów są następujące:
+Wyniki błędów są następujące:
 
 | Zbiór  | MAE (średni błąd bezwzględny) | MSE (średni błąd kwadratowy) |
 |--------|-------------------------------|-------------------------------|
@@ -78,7 +78,7 @@ Przeprowadziłem analizę, w której trenowałem model regresji osobno dla każd
 </p>
 
 
-Poniżej przedstawiono wykres rzeczywistych vs przewidywanych wartości dla modelu wielowymiarowego.
+### Poniżej wykres rzeczywistych vs przewidywanych wartości dla modelu wielowymiarowego.
   
 <p align="center">
   <img src="charts_multifeature/Wielowymiarowy_model.png" alt="Wielowymiarowy model"/>
