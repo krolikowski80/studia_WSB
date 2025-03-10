@@ -22,14 +22,22 @@ Zbiór danych zawierał **20 640** rekordów oraz **8 cech**, które mogły wpł
 
 Aby zobaczyć, jak poszczególne cechy wpływały na cenę domów, wygenerowałem wykresy punktowe dla każdej cechy. Na przykład:
 
-<img src="charts_all_features/MedInc_vs_MedHouseVal.png" alt="Wykres 1" width="300"/>  
-<img src="charts_all_features/HouseAge_vs_MedHouseVal.png" alt="Wykres 2" width="300"/>  
-<img src="charts_all_features/AveRooms_vs_MedHouseVal.png" alt="Wykres 3" width="300"/> 
-<img src="charts_all_features/AveBedrms_vs_MedHouseVal.png" alt="Wykres 4" width="300"/>
-<img src="charts_all_features/Population_vs_MedHouseVal.png" alt="Wykres 5" width="300"/>
-<img src="charts_all_features/AveOccup_vs_MedHouseVal.png" alt="Wykres 6" width="300"/> 
-<img src="charts_all_features/Latitude_vs_MedHouseVal.png" alt="Wykres 7" width="300"/>
-<img src="charts_all_features/Longitude_vs_MedHouseVal.png" alt="Wykres 8" width="300"/> 
+<p align="center">
+  <img src="charts_all_features/MedInc_vs_MedHouseVal.png" alt="Wykres 1" width="300"/>
+  <img src="charts_all_features/HouseAge_vs_MedHouseVal.png" alt="Wykres 2" width="300"/>
+  <img src="charts_all_features/AveRooms_vs_MedHouseVal.png" alt="Wykres 3" width="300"/>
+</p>
+
+<p align="center">
+  <img src="charts_all_features/AveBedrms_vs_MedHouseVal.png" alt="Wykres 4" width="300"/>
+  <img src="charts_all_features/Population_vs_MedHouseVal.png" alt="Wykres 5" width="300"/>
+  <img src="charts_all_features/AveOccup_vs_MedHouseVal.png" alt="Wykres 6" width="300"/>
+</p>
+
+<p align="center">
+  <img src="charts_all_features/Latitude_vs_MedHouseVal.png" alt="Wykres 7" width="300"/>
+  <img src="charts_all_features/Longitude_vs_MedHouseVal.png" alt="Wykres 8" width="300"/>
+</p>
 
 Z wykresów wynika, że **MedInc (medianowy dochód mieszkańców)** był silnie skorelowany z wartością domu – im wyższy dochód, tym droższe nieruchomości.
 
@@ -63,32 +71,40 @@ Aby sprawdzić, czy pojedyncze cechy wystarczyły do przewidywania cen domów, w
 Dla każdej zmiennej wygenerowałem również wykresy regresji. Aby sprawdzić, czy pojedyncze cechy wystarczyły do przewidywania cen domów, wytrenowałem **8 osobnych modeli regresji** – każdy na jednej cesze.
 
 Dla każdej zmiennej wygenerowałem również wykresy regresji.
+### Wykresy regresji dla każdej cechy:
 
-<img src="charts_single_feature/MedInc_regression.png" alt="Regresja MedInc" width="300"/>  
-<img src="charts_single_feature/HouseAge_regression.png" alt="Regresja HouseAge" width="300"/>  
-<img src="charts_single_feature/AveRooms_regression.png" alt="Regresja AveRooms" width="300"/>  
+<p align="center">
+  <img src="charts_single_feature/MedInc_regression.png" alt="Regresja MedInc" width="300"/>
+  <img src="charts_single_feature/HouseAge_regression.png" alt="Regresja HouseAge" width="300"/>
+  <img src="charts_single_feature/AveRooms_regression.png" alt="Regresja AveRooms" width="300"/>
+</p>
 
-<img src="charts_single_feature/AveBedrms_regression.png" alt="Regresja AveBedrms" width="300"/>  
-<img src="charts_single_feature/Population_regression.png" alt="Regresja Population" width="300"/>  
-<img src="charts_single_feature/AveOccup_regression.png" alt="Regresja AveOccup" width="300"/>  
+<p align="center">
+  <img src="charts_single_feature/AveBedrms_regression.png" alt="Regresja AveBedrms" width="300"/>
+  <img src="charts_single_feature/Population_regression.png" alt="Regresja Population" width="300"/>
+  <img src="charts_single_feature/AveOccup_regression.png" alt="Regresja AveOccup" width="300"/>
+</p>
 
-<img src="charts_single_feature/Latitude_regression.png" alt="Regresja Latitude" width="300"/>  
-<img src="charts_single_feature/Longitude_regression.png" alt="Regresja Longitude" width="300"/>  
+<p align="center">
+  <img src="charts_single_feature/Latitude_regression.png" alt="Regresja Latitude" width="300"/>
+  <img src="charts_single_feature/Longitude_regression.png" alt="Regresja Longitude" width="300"/>
+</p>
 
 
 ### Pełna tabela wyników dla wszystkich cech:
 
-| Cecha              | MAE (train) | MSE (train) | MAE (test) | MSE (test) |
-----------------------------------------------------------------------------
-| **Wielowymiarowy** | 0.5310      | 0.5234      | 0.5272     | 0.5306     |
-| **MedInc**         | 0.6270      | 0.7051      | 0.6232     | 0.6918     |
-| **HouseAge**       | 0.9086      | 1.3245      | 0.9013     | 1.2985     |
-| **AveRooms**       | 0.8993      | 1.3087      | 0.8883     | 1.2824     |
-| **AveBedrms**      | 0.9121      | 1.3366      | 0.9048     | 1.3103     |
-| **Population**     | 0.9141      | 1.3389      | 0.9061     | 1.3117     |
-| **AveOccup**       | 0.9140      | 1.3391      | 0.9058     | 1.3116     |
-| **Latitude**       | 0.9055      | 1.3129      | 0.8967     | 1.2830     |
-| **Longitude**      | 0.9109      | 1.3364      | 0.9026     | 1.3108     |
+| Cecha          | MAE (train) | MSE (train) | MAE (test) | MSE (test) |
+|---------------|------------|------------|------------|------------|
+| Wielowymiarowy | 0.5310     | 0.5234     | 0.5272     | 0.5306     |
+| MedInc        | 0.6270     | 0.7051     | 0.6232     | 0.6918     |
+| HouseAge     | 0.9086     | 1.3245     | 0.9013     | 1.2985     |
+| AveRooms     | 0.8993     | 1.3087     | 0.8883     | 1.2824     |
+| AveBedrms    | 0.9121     | 1.3366     | 0.9048     | 1.3103     |
+| Population   | 0.9141     | 1.3389     | 0.9061     | 1.3117     |
+| AveOccup    | 0.9140     | 1.3391     | 0.9058     | 1.3116     |
+| Latitude    | 0.9055     | 1.3129     | 0.8967     | 1.2830     |
+| Longitude   | 0.9109     | 1.3364     | 0.9026     | 1.3108     |
+
 
 ## 7. Analiza wyników
 
