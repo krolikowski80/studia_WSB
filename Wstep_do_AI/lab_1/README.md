@@ -59,6 +59,20 @@ Najpierw utworzyłem **model wielowymiarowy**, czyli taki, który uwzględniał 
 - **MAE na zbiorze testowym**: 0.527247
 - **MSE na zbiorze testowym**: 0.530568
 
+Pełna tabela wyników dla wszystkich cech:
+
+| Cecha          | MAE (train) | MSE (train) | MAE (test) | MSE (test) |
+|---------------|------------|------------|------------|------------|
+| Wielowymiarowy | 0.530969   | 0.523358   | 0.527247   | 0.530568   |
+| MedInc        | 0.627033   | 0.705137   | 0.623156   | 0.691798   |
+| HouseAge      | 0.908627   | 1.324487   | 0.901346   | 1.298525   |
+| AveRooms      | 0.899329   | 1.308700   | 0.888332   | 1.282406   |
+| AveBedrms     | 0.912082   | 1.336550   | 0.904754   | 1.310307   |
+| Population    | 0.914058   | 1.338904   | 0.906106   | 1.311698   |
+| AveOccup     | 0.914008   | 1.339107   | 0.905821   | 1.311583   |
+| Latitude      | 0.905495   | 1.312861   | 0.896702   | 1.282952   |
+| Longitude     | 0.910863   | 1.336434   | 0.902603   | 1.310834   |
+
 ## 6. Regresja liniowa dla pojedynczych cech
 
 <p align="center">
