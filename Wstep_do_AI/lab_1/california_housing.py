@@ -36,7 +36,7 @@ for column in X.columns:
     plt.ylabel("MedHouseVal")
     plt.title(f"{column} vs MedHouseVal")
     plt.grid(True)
-    
+
     # Zapisywanie wykresu
     plt.savefig(f"charts_all_features/{column}_vs_MedHouseVal.png")
     plt.close()
@@ -45,7 +45,8 @@ for column in X.columns:
 # (c) Podział na zbiór uczący i testowy
 # =====================================================================
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42)
 
 # Zapisanie rozmiarów zbiorów do pliku Excel
 rozmiary_df = pd.DataFrame({
@@ -98,36 +99,39 @@ wyniki_cech = []
 for feature in X.columns:
     X_train_single = X_train[[feature]]
     X_test_single = X_test[[feature]]
-    
+
     model_single = LinearRegression()
     model_single.fit(X_train_single, y_train)
-    
+
     y_train_pred_single = model_single.predict(X_train_single)
     y_test_pred_single = model_single.predict(X_test_single)
-    
+
     mae_train_single = mean_absolute_error(y_train, y_train_pred_single)
     mse_train_single = mean_squared_error(y_train, y_train_pred_single)
-    
+
     mae_test_single = mean_absolute_error(y_test, y_test_pred_single)
     mse_test_single = mean_squared_error(y_test, y_test_pred_single)
-    
-    wyniki_cech.append([feature, mae_train_single, mse_train_single, mae_test_single, mse_test_single])
+
+    wyniki_cech.append([feature, mae_train_single,
+                       mse_train_single, mae_test_single, mse_test_single])
 
     # Tworzenie wykresu regresji dla pojedynczej cechy
     plt.figure(figsize=(6, 4))
-    plt.scatter(X_test_single, y_test, alpha=0.5, edgecolors="k", label="Dane rzeczywiste")
+    plt.scatter(X_test_single, y_test, alpha=0.5,
+                edgecolors="k", label="Dane rzeczywiste")
     plt.plot(X_test_single, y_test_pred_single, color="red", label="Regresja")
     plt.xlabel(feature)
     plt.ylabel("MedHouseVal")
     plt.title(f"Regresja dla cechy {feature}")
     plt.legend()
     plt.grid(True)
-    
+
     plt.savefig(f"charts_single_feature/{feature}_regression.png")
     plt.close()
 
 # Zapisywanie wyników regresji dla poszczególnych cech
-wyniki_cech_df = pd.DataFrame(wyniki_cech, columns=["Cecha", "MAE (train)", "MSE (train)", "MAE (test)", "MSE (test)"])
+wyniki_cech_df = pd.DataFrame(wyniki_cech, columns=[
+                              "Cecha", "MAE (train)", "MSE (train)", "MAE (test)", "MSE (test)"])
 wyniki_cech_df.to_excel("wyniki_cech.xlsx", index=False)
 
 # =====================================================================
@@ -137,8 +141,10 @@ wyniki_cech_df.to_excel("wyniki_cech.xlsx", index=False)
 os.makedirs("charts_multifeature", exist_ok=True)
 
 plt.figure(figsize=(6, 6))
-plt.scatter(y_test, y_test_pred, alpha=0.5, edgecolors="k", label="Predykcja modelu")
-plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color="red", linestyle="--", label="Idealna linia")
+plt.scatter(y_test, y_test_pred, alpha=0.5,
+            edgecolors="k", label="Predykcja modelu")
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)],
+         color="red", linestyle="--", label="Idealna linia")
 plt.xlabel("Rzeczywiste wartości cen domów")
 plt.ylabel("Przewidywane wartości cen domów")
 plt.title("Wielowymiarowy model regresji: Rzeczywiste vs. Przewidywane")
@@ -146,4 +152,5 @@ plt.legend()
 plt.grid(True)
 
 plt.savefig("charts_multifeature/Wielowymiarowy_model.png")
+plt.show()
 plt.close()
