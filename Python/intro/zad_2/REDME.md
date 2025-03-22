@@ -13,7 +13,7 @@
 ## 2. Struktura projektu
 
 ```
-TDD_Lab2/
+Lab_2/
 ├── app.py             # Zawiera 5 funkcji do przetestowania
 ├── test_app.py        # Zawiera testy jednostkowe
 ├── README.md          # Dokumentacja zadania
