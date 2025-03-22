@@ -1,15 +1,20 @@
 # --------------------------------------------------------------
 # Importy potrzebnych funkcji i bibliotek.
 # --------------------------------------------------------------
-from sklearn import datasets             # Umożliwia pobieranie gotowych zbiorów danych
-from sklearn.model_selection import train_test_split  # Służy do podziału danych na zbiór uczący i testowy
-from sklearn.svm import SVC              # Klasyfikator SVC (Support Vector Classifier)
-from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay  # Metryki oceny modelu
+# Umożliwia pobieranie gotowych zbiorów danych
+from sklearn import datasets
+# Służy do podziału danych na zbior uczący i testowy
+from sklearn.model_selection import train_test_split
+# Klasyfikator SVC (Support Vector Classifier)
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay, precision_score, recall_score, f1_score
 import numpy as np                       # Obsługa operacji numerycznych
 import matplotlib.pyplot as plt          # Biblioteka do tworzenia wykresów
+import os                                # Operacje na plikach i katalogach
+import pandas as pd                      # Do zapisu wyników do Excela
 
 # --------------------------------------------------------------
-# (a) Wczytaj zbiór danych.
+# (a) Wczytaj zbór danych.
 # --------------------------------------------------------------
 breast_cancer_data = datasets.load_breast_cancer()
 
@@ -17,17 +22,10 @@ breast_cancer_data = datasets.load_breast_cancer()
 #  - X = dane (cechy) próbek,
 #  - y = etykiety (klasy) każdej próbki.
 X = breast_cancer_data.data   # cechy (atrybuty) opisujące każdą próbkę
-y = breast_cancer_data.target # etykiety (np. 0 = malignant, 1 = benign)
+y = breast_cancer_data.target  # etykiety (np. 0 = malignant, 1 = benign)
 
 # --------------------------------------------------------------
-# (b) Podziel dane na zbiór uczący i testujący za pomocą funkcji train_test_split w proporcji
-# 0.7 danych uczących i 0.3 testowych: 
-# https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
-#
-# 1. Funkcja train_test_split losowo dzieli dane na część uczącą (70%) i testową (30%).
-# 2. test_size=0.3 oznacza, że 30% danych trafia do zbioru testowego, a 70% do zbioru uczącego.
-# 3. random_state=42 ustala ziarno losowości, co pozwala uzyskać powtarzalny podział.
-# 4. shuffle=True powoduje, że dane są mieszane przed podziałem.
+# (b) Podziel dane na zbior uczący i testujący
 # --------------------------------------------------------------
 X_train, X_test, y_train, y_test = train_test_split(
     X,
@@ -37,40 +35,30 @@ X_train, X_test, y_train, y_test = train_test_split(
     shuffle=True
 )
 
-# Sprawdzamy rozmiary powstałych zbiorów, aby upewnić się, że podział przebiegł poprawnie.
 print("Rozmiar X_train:", X_train.shape)
 print("Rozmiar X_test: ", X_test.shape)
 print("Rozmiar y_train:", y_train.shape)
 print("Rozmiar y_test: ", y_test.shape)
 
 # --------------------------------------------------------------
-# (c) Naucz klasyfikatory SVC na danych uczących.
-#
-# 1. Tworzymy obiekt klasyfikatora SVC z domyślnymi parametrami (kernel='rbf', C=1.0).
-# 2. Metoda fit(X_train, y_train) trenuje model na zbiorze uczącym.
+# (c) Naucz klasyfikator SVC na danych uczących
 # --------------------------------------------------------------
 svc_clf = SVC()
 svc_clf.fit(X_train, y_train)
 print("\nModel SVC został wytrenowany na zbiorze uczącym (domyślne parametry).")
 
 # --------------------------------------------------------------
-# (d) Oblicz dokładność klasyfikacji (accuracy) na zbiorze danych testowych.
-#
-# Używamy funkcji accuracy_score, aby porównać etykiety prawdziwe (y_test)
-# z predykcjami uzyskanymi za pomocą metody predict.
+# (d) Oblicz dokładność klasyfikacji (accuracy)
 # --------------------------------------------------------------
 y_pred_default = svc_clf.predict(X_test)
 accuracy_default = accuracy_score(y_test, y_pred_default)
 print("Dokładność klasyfikacji dla domyślnego SVC:", accuracy_default)
 
 # --------------------------------------------------------------
-# (e) Powtórz punkty (c) i (d) w celu znalezienia optymalnego parametru C
-#     oraz przebadania wpływu argumentu kernel ('linear' oraz 'rbf').
-#
-# Dla obu rodzajów jądra (kernel) sprawdzamy, jak zmienia się dokładność modelu dla różnych wartości C.
+# (e) Szukanie najlepszego parametru C dla linear i rbf
 # --------------------------------------------------------------
-C_values = [0.1, 1, 10, 100]  # Lista wartości parametru C do przetestowania
-best_params = {}              # Słownik do zapamiętania najlepszego C dla każdego typu jądra
+C_values = [0.1, 1, 10, 100]
+best_params = {}
 
 for kernel in ['linear', 'rbf']:
     best_accuracy = 0
@@ -85,59 +73,82 @@ for kernel in ['linear', 'rbf']:
             best_accuracy = acc
             best_C = C
     best_params[kernel] = best_C
-    print(f"Najlepsze C dla jądra '{kernel}': {best_C} z dokładnością {best_accuracy:.4f}\n")
+    print(
+        f"Najlepsze C dla jądra '{kernel}': {best_C} z dokładnością {best_accuracy:.4f}\n")
 
 # --------------------------------------------------------------
-# (f) Naucz dwa klasyfikatory: jeden z kernel='linear' oraz drugi z kernel='rbf',
-#     przy użyciu optymalnych wartości C znalezionych w punkcie (e). 
-#
-# Dla każdego z nich wykonaj:
-# 1. Stwórz macierz konfuzji pokazującą dokładność klasyfikacji na danych testowych.
-#    Użyjemy ConfusionMatrixDisplay do wizualizacji macierzy.
-# 2. Wykonaj wizualizację danych na wykresie punktowym (scatter):
-#    - Pierwszy wykres: rzeczywisty podział klas (prawdziwe etykiety) dla dwóch wybranych cech.
-#    - Drugi wykres: podział klas według predykcji klasyfikatora (uzyskanych przez predict) dla tych samych cech.
-#    Dla uproszczenia wybieramy pierwsze dwie cechy z danych.
+# (f) Naucz modele, zapisz wykresy i wyniki
 # --------------------------------------------------------------
-# Słownik, w którym przechowamy wytrenowane klasyfikatory dla każdego typu jądra
+output_dir = "lab2_wyniki"
+os.makedirs(output_dir, exist_ok=True)
+
+results = []
 classifiers = {}
 
 for kernel in ['linear', 'rbf']:
-    # Trenowanie klasyfikatora z optymalnym parametrem C dla danego jądra
     clf = SVC(kernel=kernel, C=best_params[kernel])
     clf.fit(X_train, y_train)
     classifiers[kernel] = clf
-    
-    # Predykcje na zbiorze testowym
+
     y_pred = clf.predict(X_test)
-    
-    # 1. Tworzenie i wyświetlanie macierzy konfuzji
+
+    # Metryki
+    acc = accuracy_score(y_test, y_pred)
+    prec = precision_score(y_test, y_pred)
+    rec = recall_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
     cm = confusion_matrix(y_test, y_pred)
-    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=breast_cancer_data.target_names)
+    tn, fp, fn, tp = cm.ravel()
+
+    results.append({
+        "Kernel": kernel,
+        "Best C": best_params[kernel],
+        "Accuracy": acc,
+        "Precision": prec,
+        "Recall": rec,
+        "F1-score": f1,
+        "True Positives (TP)": tp,
+        "True Negatives (TN)": tn,
+        "False Positives (FP)": fp,
+        "False Negatives (FN)": fn
+    })
+
+    # Wykres: macierz konfuzji
+    disp = ConfusionMatrixDisplay(
+        confusion_matrix=cm, display_labels=breast_cancer_data.target_names)
     disp.plot(cmap=plt.cm.Blues)
-    plt.title(f"Macierz konfuzji dla SVC (kernel='{kernel}', C={best_params[kernel]})")
+    plt.title(
+        f"Macierz konfuzji dla SVC (kernel='{kernel}', C={best_params[kernel]})")
+    plt.savefig(os.path.join(output_dir, f"macierz_konfuzji_{kernel}.png"))
     plt.show()
-    
-    # 2. Wizualizacja danych na wykresach scatter
-    # Wybieramy dwie pierwsze cechy do wizualizacji (np. 'mean radius' i 'mean texture')
+
+    # Wykres: scatter rzeczywisty
     feature_idx = [0, 1]
     X_two = X[:, feature_idx]
-    
-    # Wykres z rzeczywistym podziałem klas (prawdziwe etykiety)
+
     plt.figure()
-    plt.scatter(X_two[:, 0], X_two[:, 1], c=y, cmap='viridis', edgecolor='k', s=50)
+    plt.scatter(X_two[:, 0], X_two[:, 1], c=y,
+                cmap='viridis', edgecolor='k', s=50)
     plt.xlabel(breast_cancer_data.feature_names[0])
     plt.ylabel(breast_cancer_data.feature_names[1])
     plt.title(f"Rzeczywisty podział klas - {kernel} kernel")
+    plt.savefig(os.path.join(output_dir, f"rzeczywisty_podzial_{kernel}.png"))
     plt.show()
-    
-    # Wykres z podziałem klas według predykcji klasyfikatora
-    # Predykcje uzyskujemy dla całego zbioru (X) – choć klasyfikator został trenowany na pełnych danych,
-    # do wizualizacji używamy tylko dwóch wybranych cech.
+
+    # Wykres: scatter predykcja
     y_pred_all = clf.predict(X)
     plt.figure()
-    plt.scatter(X_two[:, 0], X_two[:, 1], c=y_pred_all, cmap='viridis', edgecolor='k', s=50)
+    plt.scatter(X_two[:, 0], X_two[:, 1], c=y_pred_all,
+                cmap='viridis', edgecolor='k', s=50)
     plt.xlabel(breast_cancer_data.feature_names[0])
     plt.ylabel(breast_cancer_data.feature_names[1])
-    plt.title(f"Predykcje klasyfikatora (kernel='{kernel}', C={best_params[kernel]})")
+    plt.title(
+        f"Predykcje klasyfikatora (kernel='{kernel}', C={best_params[kernel]})")
+    plt.savefig(os.path.join(output_dir, f"predykcja_{kernel}.png"))
     plt.show()
+
+# Zapis do Excela
+excel_path = os.path.join(output_dir, "rozszerzone_wyniki_klasyfikacji.xlsx")
+df = pd.DataFrame(results)
+df.to_excel(excel_path, index=False)
+print("\n Wyniki i wykresy zapisane w katalogu 'lab2_wyniki'")
