@@ -3,6 +3,9 @@
 Tomasz Królikowski <br>
 nr albumu: 153790
 
+Repozytorium tego ćwiczenia na GitHub <br>
+https://github.com/krolikowski80/studia_WSB/tree/main/Wstep_do_AI/lab_3
+
 ---
 
 ## 1. Opis zadania
