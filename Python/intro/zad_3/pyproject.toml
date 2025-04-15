@@ -1,0 +1,29 @@
+[build-system]
+# Określamy wymagania do budowania pakietu
+requires = ["setuptools"]
+# Określamy system budowania pakietu - setuptools to standard w Pythonie
+build-backend = "setuptools.build_meta"
+
+[project]
+# Nazwa projektu (musi być unikalna jeśli publikujemy do PyPI)
+name = "my_awesome_lib"
+# Wersja projektu
+version = "0.1"
+# Krótki opis projektu
+description = "Przykładowa biblioteka Python do labów WSB"
+# Informacje o autorze
+authors = [
+    { name="Tomasz Królikowski", email="t.krolikowski@gmail.com" }
+]
+# Ścieżka do pliku README
+readme = "README.md"
+# Wymagana wersja Pythona
+requires-python = ">=3.8"
+# Licencja
+license = { text = "MIT" }
+
+[tool.black]
+# Konfiguracja formatera black
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'

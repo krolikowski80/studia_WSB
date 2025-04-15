@@ -1,4 +1,7 @@
-# Zadanie 3.3 - Korzystanie z dokumentacji języka Python
+# Zadanie 1 - Korzystanie z dokumentacji języka Python
+
+## 👤 Autor
+### Tomasz Królikowski, numer albumu: 153790
 
 W ramach tego zadania zapoznałem się z dokumentacją Pythona i wyszukałem informacje na temat funkcji wbudowanej, modułu oraz wyjątku.
 

@@ -1,5 +1,8 @@
 # Lab 2 – Testowanie aplikacji: Test-Driven Development (TDD)
 
+## 👤 Autor
+### Tomasz Królikowski, numer albumu: 153790
+
 ## 1. Cel zadania
 
 - Zapoznanie się z podstawami testowania aplikacji w Pythonie.
@@ -72,9 +75,3 @@ Potrzebne są tylko:
 - `unittest` (wbudowany)
 - `re`, `datetime` (wbudowane)
 - `coverage` (do sprawdzenia pokrycia)
-
-
-
-git add .
-git commit -m "feat: Implementacja funkcji i testów jednostkowych TDD (Lab2)"
-git push origin main
