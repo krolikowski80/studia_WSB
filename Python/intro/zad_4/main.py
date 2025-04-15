@@ -4,14 +4,22 @@ Autor: Tomasz Królikowski
 Cel: Porównanie metod TOPSIS i SPOTIS na przykładowym zbiorze danych
 """
 
+# --- Import niezbędnych bibliotek ---
+# numpy - operacje na macierzach i danych numerycznych
+# pandas - tworzenie i zapisywanie tabel z wynikami
+# pymcdm - biblioteka do metod wielokryterialnego podejmowania decyzji (MCDM)
+# matplotlib - tworzenie wykresów
+
 import numpy as np
 import pandas as pd
 from pymcdm.methods import TOPSIS, SPOTIS
-from pymcdm.normalizations import MinMax
+from pymcdm.normalizations import minmax_normalization
 from pymcdm.helpers import rankdata
 import matplotlib.pyplot as plt
 
 # --- Dane wejściowe ---
+# Przygotowujemy macierz decyzyjną (alternatywy i kryteria)
+# Definiujemy wagi kryteriów oraz typy (maksymalizuj lub minimalizuj)
 
 # Macierz decyzyjna: wiersze = alternatywy, kolumny = kryteria
 decision_matrix = np.array([
@@ -27,20 +35,30 @@ weights = np.array([0.5, 0.3, 0.2])
 # Typy kryteriów: 1 = maksymalizuj, -1 = minimalizuj
 types = np.array([-1, 1, 1])  # Koszt minimalizowany, reszta maksymalizowana
 
-# Normalizacja danych
-normalizer = MinMax()
+# --- Zastosowanie metody TOPSIS ---
+# Normalizacja danych i wyznaczenie wyników metodą TOPSIS
+# Obliczamy ranking na podstawie wyników (im wyższy wynik, tym lepsza alternatywa)
 
-# --- Metoda TOPSIS ---
-topsis = TOPSIS(normalizer)
+topsis = TOPSIS(normalization_function=minmax_normalization)
 topsis_scores = topsis(decision_matrix, weights, types)
-topsis_ranking = rankdata(topsis_scores, descending=True)
+topsis_ranking = rankdata(-topsis_scores)
 
-# --- Metoda SPOTIS ---
-spotis = SPOTIS()
+# --- Zastosowanie metody SPOTIS ---
+# Wyznaczenie zakresów wartości (bounds) dla każdego kryterium
+# Obliczenie wyników metodą SPOTIS i przypisanie rankingów (niższy wynik = lepsza alternatywa)
+
+# Wyznaczenie bounds: [min, max] dla każdego kryterium
+min_ = decision_matrix.min(axis=0)
+max_ = decision_matrix.max(axis=0)
+bounds = np.array([[min_[i], max_[i]] for i in range(decision_matrix.shape[1])])
+
+spotis = SPOTIS(bounds)
 spotis_scores = spotis(decision_matrix, weights, types)
-spotis_ranking = rankdata(spotis_scores, descending=False)
+spotis_ranking = rankdata(spotis_scores)
 
-# --- Wyniki ---
+# --- Przygotowanie wyników do analizy ---
+# Tworzymy DataFrame z wynikami obu metod i rankingami
+
 df = pd.DataFrame({
     'Alternatywa': ['A', 'B', 'C', 'D'],
     'TOPSIS Score': topsis_scores,
@@ -49,12 +67,15 @@ df = pd.DataFrame({
     'SPOTIS Ranking': spotis_ranking
 })
 
-print(df)
+# --- Zapis wyników do pliku Excel ---
+# Eksportujemy wyniki do pliku Excel w folderze 'wyniki'
 
-# Zapisz wyniki do pliku
+print(df)
 df.to_excel("wyniki/wyniki_topsis_spotis.xlsx", index=False)
 
-# Tworzymy wykres słupkowy porównujący wyniki TOPSIS i SPOTIS
+# --- Tworzenie wykresu porównawczego ---
+# Wykres słupkowy porównujący wyniki TOPSIS i SPOTIS dla każdej alternatywy
+
 labels = ['A', 'B', 'C', 'D']
 x = np.arange(len(labels))  # lokalizacje słupków
 width = 0.35  # szerokość słupka
@@ -72,6 +93,8 @@ ax.legend()
 
 fig.tight_layout()
 
-# Zapisujemy wykres do pliku
+# --- Zapis wykresu do pliku ---
+# Zapisujemy wykres jako plik PNG w folderze 'wyniki'
+
 plt.savefig('wyniki/wykres.png')
 plt.close()
