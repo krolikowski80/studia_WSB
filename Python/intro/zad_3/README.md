@@ -13,6 +13,7 @@
 Aby zainstalować bibliotekę lokalnie w trybie deweloperskim, użyj polecenia:
 
 ```
+pip install -r requirements.txt
 pip install -e .
 ```
 
