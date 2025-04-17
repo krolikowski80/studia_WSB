@@ -68,5 +68,6 @@ To sposób na integrację spiderów z innymi aplikacjami lub pipeline'ami.
 
 ## 5. Linki
 
-- https://www.crummy.com/software/BeautifulSoup/
-- https://docs.scrapy.org/en/latest/
+- Dokumentacja BeautifulSoup: [https://www.crummy.com/software/BeautifulSoup/bs4/doc/](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+- Dokumentacja Scrapy: [https://docs.scrapy.org/en/latest/](https://docs.scrapy.org/en/latest/)
+

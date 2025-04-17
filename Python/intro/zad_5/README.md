@@ -108,7 +108,7 @@ pip install beautifulsoup4 lxml requests scrapy
 
 ---
 
-## ℹ️ Autor
-Projekt wykonany w celach edukacyjnych – Lab 5, Web Scraping.  
-Python + BeautifulSoup + Scrapy
+## 🔗 Linki do dokumentacji
 
+- [BeautifulSoup – dokumentacja](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+- [Scrapy – dokumentacja](https://docs.scrapy.org/en/latest/)
