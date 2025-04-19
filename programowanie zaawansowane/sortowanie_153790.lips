@@ -1,0 +1,164 @@
+;;; ============================================================================
+;;;  Zadanie domowe – Common Lisp  (Część I)
+;;; ----------------------------------------------------------------------------
+;;;  Autor      : Tomasz Królikowski
+;;;  Nr albumu  : 153790
+;;;  Plik       : sortowanie.lisp
+;;;  Środowisko : https://rextester.com/l/common_lisp_online_compiler  (SBCL)
+;;;
+;;;  Opis zadania
+;;;  -------------
+;;;  • Wygeneruj listę 100 liczb losowych (0 ≤ x < 100).
+;;;  • Każdą liczbę nieparzystą zwiększ o 1, aby uzyskać same liczby parzyste.
+;;;  • Posortuj wynik malejąco metodą bąbelkową.
+;;;  • Wyświetl stan listy przed modyfikacją, po korekcie parzystości
+;;;    oraz po sortowaniu.
+;;; ============================================================================
+
+;;; ---------------------------------------------------------------------------
+;;;  1.  Generowanie listy liczb losowych
+;;; ---------------------------------------------------------------------------
+
+(defun generuj-liste (n &optional (maks 100))
+  "Zwraca listę N liczb losowych z zakresu [0, MAKS)."
+  (loop repeat n collect (random maks)))
+
+;;; ---------------------------------------------------------------------------
+;;;  2.  Korekta nieparzystych (x → x+1)
+;;; ---------------------------------------------------------------------------
+
+(defun skoryguj-parzystosc (lista)
+  "Zwraca nową listę, w której każda liczba nieparzysta została zwiększona o 1."
+  (mapcar (lambda (x) (if (oddp x) (1+ x) x)) lista))
+
+;;; ---------------------------------------------------------------------------
+;;;  3.  Sortowanie bąbelkowe malejące
+;;; ---------------------------------------------------------------------------
+
+(defun bubble-sort-desc (lista)
+  "Zwraca kopię LISTA posortowaną malejąco (bubble sort)."
+  (let* ((wynik (copy-list lista))
+         (len (length wynik)))
+    (dotimes (i len wynik)
+      (dotimes (j (- len i 1))
+        (when (< (nth j wynik) (nth (1+ j) wynik))
+          (rotatef (nth j wynik) (nth (1+ j) wynik)))))))
+
+;;; ---------------------------------------------------------------------------
+;;;  4.  Funkcja demonstracyjna
+;;; ---------------------------------------------------------------------------
+
+(defun main ()
+  (let* ((losowe       (generuj-liste 100))
+         (parzyste     (skoryguj-parzystosc losowe))
+         (posortowane  (bubble-sort-desc parzyste)))
+    (format t "\n--- Lista losowa (100) ---------------------------~%~a~%~%" losowe)
+    (format t "--- Po korekcie nieparzystych (+1) ---------------~%~a~%~%" parzyste)
+    (format t "--- Po sortowaniu malejąco (bubble) --------------~%~a~%~%" posortowane)))
+
+;;; ---------------------------------------------------------------------------
+;;;  5.  Automatyczne uruchomienie
+;;; ---------------------------------------------------------------------------
+
+(main)
+
+
+;;; =========================================================================
+;;;  Zadanie domowe – Common Lisp  (Część I & II)
+;;; -------------------------------------------------------------------------
+;;;  Autor      : Tomasz Królikowski
+;;;  Nr albumu  : 153790
+;;;  Plik       : sortowanie.lisp
+;;;  Środowisko : https://rextester.com/l/common_lisp_online_compiler  (SBCL)
+;;;
+;;;  Zawartość pliku
+;;;  ---------------
+;;;    •  Część I  – losowanie 100 liczb, korekta nieparzystych, sortowanie
+;;;                  bąbelkowe ***malejące***.
+;;;    •  Część II – implementacja **quicksort malejącego** (rekurencja) oraz
+;;;                  makro `with-timer` do krótkiego pomiaru czasu.
+;;;
+;;;  Uruchomienie w REPL‑u
+;;;  ---------------------
+;;;      (load "sortowanie.lisp")   ; wczytaj plik
+;;;      (main)                     ; bubble‑sort demo (część I)
+;;;      (main-qs)                  ; quicksort demo + timer (część II)
+;;;
+;;;  W Rextesterze wywołania znajdują się na końcu pliku, więc po kliknięciu
+;;;  **Run** obie demonstracje wykonają się kolejno automatycznie.
+;;; =========================================================================
+
+(defun generuj-liste (n &optional (maks 100))
+  "Zwraca listę N liczb losowych z zakresu [0, MAKS)."
+  (loop repeat n collect (random maks)))
+
+(defun skoryguj-parzystosc (lista)
+  "Zwraca nową listę, w której każda liczba nieparzysta została zwiększona o 1."
+  (mapcar (lambda (x) (if (oddp x) (1+ x) x)) lista))
+
+(defun bubble-sort-desc (lista)
+  "Zwraca kopię LISTA posortowaną malejąco (bubble sort)."
+  (let* ((wynik (copy-list lista))
+         (len   (length wynik)))
+    (dotimes (i len wynik)
+      (dotimes (j (- len i 1))
+        (when (< (nth j wynik) (nth (1+ j) wynik))
+          (rotatef (nth j wynik) (nth (1+ j) wynik)))))))
+
+;;; -------------------------------------------------------------------------
+;;;  Quicksort malejący (Część II)
+;;; -------------------------------------------------------------------------
+
+(defun quicksort-desc (lista)
+  "Zwraca NOWĄ listę posortowaną malejąco (quicksort)."
+  (if (or (null lista) (null (rest lista)))
+      (copy-list lista)
+      (let* ((pivot (first lista))
+             (>=pivot '())
+             (<pivot  '()))
+        (dolist (x (rest lista))
+          (if (>= x pivot) (push x >=pivot) (push x <pivot)))
+        (nconc (quicksort-desc >=pivot)
+               (list pivot)
+               (quicksort-desc <pivot)))))
+
+;;; -------------------------------------------------------------------------
+;;;  Makro pomiaru czasu (Część II – wykorzystanie makr)
+;;; -------------------------------------------------------------------------
+
+(defmacro with-timer ((var) &body body)
+  "Makro mierzące czas BODY w milisekundach; wynik zapisywany do VAR."
+  `(let* ((start (get-internal-real-time))
+          ,var)
+     (prog1 (progn ,@body)
+       (setf ,var (/ (- (get-internal-real-time) start)
+                     (/ internal-time-units-per-second 1000))))))
+
+;;; -------------------------------------------------------------------------
+;;;  Funkcje demonstracyjne
+;;; -------------------------------------------------------------------------
+
+(defun main ()
+  (let* ((losowe      (generuj-liste 100))
+         (parzyste    (skoryguj-parzystosc losowe))
+         (posortowane (bubble-sort-desc parzyste)))
+    (format t "\n--- Lista losowa -------------------------------~%~a~%~%" losowe)
+    (format t "--- Po korekcie nieparzystych (+1) ------------~%~a~%~%" parzyste)
+    (format t "--- Bubble sort malejąco ----------------------~%~a~%~%" posortowane)))
+
+(defun main-qs ()
+  (let* ((losowe    (generuj-liste 100))
+         (parzyste  (skoryguj-parzystosc losowe))
+         elapsed-ms
+         (posortowane (with-timer (elapsed-ms)
+                        (quicksort-desc parzyste))))
+    (format t "\n--- Quicksort DEMO ------------------------------~%")
+    (format t "Czas sortowania: ~a ms~%" elapsed-ms)
+    (format t "Lista po quicksort DESC:~%~a~%" posortowane)))
+
+;;; -------------------------------------------------------------------------
+;;;  Automatyczne wywołania (dla Rextestera) –  obie demonstracje kolejno
+;;; -------------------------------------------------------------------------
+
+(main)     ; Bubble‑sort demo
+(main-qs)  ; Quicksort demo + timer
